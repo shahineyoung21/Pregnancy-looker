@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.superg.medical"
+    namespace = "com.mybrother.medical"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.superg.medical"
+        applicationId = "com.mybrother.medical"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -45,6 +45,9 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.14"
     }
+    packagingOptions {
+        exclude "META-INF/proguard/androidx-*.pro"
+    }
 }
 
 dependencies {
@@ -56,6 +59,11 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.06.00"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 }

@@ -1,8 +1,8 @@
-# superG Agent - Medical Research
+# Medical Research Agent
 
-This agent supports medical research and analysis for the superG platform.
+This agent supports research and analysis for the superG Medical Android application.
 
 ## Purpose
-- Review medical app features and requirements.
-- Summarize health-related screens and logic.
-- Help keep project direction aligned with healthcare domain.
+- Review app features and requirements
+- Summarize health-related screens and logic
+- Help keep project direction aligned with the medical domain
