@@ -4,8 +4,6 @@ on:
   workflow_dispatch:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   build:
@@ -23,24 +21,22 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK
+      - name: Setup Android SDK
         uses: android-actions/setup-android@v3
-
-      - name: Install SDK packages
-        run: sdkmanager "platforms;android-34" "build-tools;34.0.0"
+        with:
+          packages: 'platforms;android-34 build-tools;34.0.0 platform-tools'
 
       - name: Grant execute permission
-        run: chmod +x ./superG_Agent/android/gradlew || true
+        run: chmod +x superG_Agent/android/gradlew || true
 
       - name: Build APK
+        working-directory: superG_Agent/android
         run: |
-          cd superG_Agent/android
-          if [ -f gradlew ]; then
-            ./gradlew assembleDebug --stacktrace
-          else
-            echo "gradlew not found - project incomplete"
+          if [ ! -f gradlew ]; then
+            echo "gradlew not found"
             exit 1
           fi
+          ./gradlew assembleDebug --stacktrace
 
       - name: Upload APK
         if: success()
@@ -48,3 +44,4 @@ jobs:
         with:
           name: MyBrotherMedical-debug-apk
           path: superG_Agent/android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: warn
