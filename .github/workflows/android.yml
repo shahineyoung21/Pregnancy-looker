@@ -26,17 +26,12 @@ jobs:
         with:
           packages: 'platforms;android-34 build-tools;34.0.0 platform-tools'
 
-      - name: Grant execute permission
-        run: chmod +x superG_Agent/android/gradlew || true
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
 
       - name: Build APK
         working-directory: superG_Agent/android
-        run: |
-          if [ ! -f gradlew ]; then
-            echo "gradlew not found"
-            exit 1
-          fi
-          ./gradlew assembleDebug --stacktrace
+        run: gradle assembleDebug --stacktrace
 
       - name: Upload APK
         if: success()
