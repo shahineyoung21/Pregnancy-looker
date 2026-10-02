@@ -8,17 +8,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "17"
-
-      - name: Grant execute permission for Gradlew
-        run: chmod +x ./superG_Agent/android/gradlew
-
-      - name: Build APK
-        run: cd superG_Agent/android && ./gradlew assembleDebug
+          java-version: '17'
+      - run: ./gradlew assembleDebug
